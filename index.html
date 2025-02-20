@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quitandas SENAI</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #e0f7fa;
+            text-align: center;
+            color: #01579b;
+        }
+        header {
+            background-color: #0288d1;
+            color: white;
+            padding: 15px;
+            font-size: 1.5em;
+        }
+        nav {
+            margin: 20px 0;
+        }
+        nav a {
+            margin: 0 15px;
+            text-decoration: none;
+            color: #01579b;
+            font-weight: bold;
+        }
+        section {
+            padding: 20px;
+        }
+        .galeria {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+
+        .galeria h2 {
+            width: 100%;
+            margin-bottom: 20px; /* Distância entre o título e as imagens */
+            background-color: #0288d1;
+            color: white;
+            padding: 10px;
+            border-radius: 5px;
+        }
+
+        .galeria img {
+            width: 200px;
+            height: 200px;
+            object-fit: cover;
+            margin: 10px;
+            border-radius: 10px;
+            cursor: pointer;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .carrinho {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: white;
+            padding: 10px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.2);
+            border: 2px solid #0288d1;
+        }
+        .carrinho ul {
+            list-style: none;
+            padding: 0;
+        }
+        .carrinho button {
+            margin-top: 10px;
+            padding: 5px 10px;
+            background-color: #0288d1;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        footer {
+            background-color: #0288d1;
+            color: white;
+            padding: 10px;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+        button:hover {
+            background-color: #0277bd;
+        }
+    </style>
+    <script>
+        let carrinho = [];
+        function adicionarAoCarrinho(produto) {
+            carrinho.push(produto);
+            atualizarCarrinho();
+        }
+        function removerDoCarrinho(index) {
+            carrinho.splice(index, 1);
+            atualizarCarrinho();
+        }
+        function atualizarCarrinho() {
+            let lista = document.getElementById('carrinho-itens');
+            lista.innerHTML = '';
+            carrinho.forEach((item, index) => {
+                let li = document.createElement('li');
+                li.innerHTML = `${item} <button onclick="removerDoCarrinho(${index})">Remover</button>`;
+                lista.appendChild(li);
+            });
+        }
+        function finalizarCompra() {
+            alert("Compra finalizada! Obrigado por comprar na Quitandas SENAI.");
+            carrinho = [];
+            atualizarCarrinho();
+        }
+    </script>
+</head>
+<body>
+    <header>
+        <h1>Quitandas SENAI</h1>
+    </header>
+    <nav>
+        <a href="#sobre">Sobre</a>
+        <a href="#galeria">Galeria</a>
+        <a href="#contato">Contato</a>
+    </nav>
+    <div class="carrinho">
+        <h3>Carrinho</h3>
+        <ul id="carrinho-itens">Nenhum item no carrinho</ul>
+        <button onclick="finalizarCompra()">Finalizar Compra</button>
+    </div>
+    <section id="sobre">
+        <h2>Sobre as Quitandas</h2>
+        <p>As quitandas são delícias tradicionais feitas com ingredientes naturais e muito sabor. Descubra nossas receitas artesanais!</p>
+    </section>
+    <section id="galeria" class="galeria">
+        <h2>Galeria de Produtos</h2>
+        <img src="44-pão-de-queijo.jpg" alt="Pão de queijo" onclick="adicionarAoCarrinho('Pão de queijo')">
+        <img src="Biscoito caseiro.jpg" alt="Biscoito caseiro" onclick="adicionarAoCarrinho('Biscoito caseiro')">
+        <img src="images.jpg" alt="Broa de milho" onclick="adicionarAoCarrinho('Broa de milho')">
+        <img src="bolo de fuba.webp" alt="Bolo de fubá" onclick="adicionarAoCarrinho('Bolo de fubá')">
+        <img src="Rosca.webp" alt="Rosca doce" onclick="adicionarAoCarrinho('Rosquinha doce')">
+    </section>
+    <section id="contato">
+        <h2>Contato</h2>
+        <form>
+            <label for="nome">Nome:</label>
+            <input type="text" id="nome" name="nome" required><br><br>
+            <label for="email">E-mail:</label>
+            <input type="email" id="email" name="email" required><br><br>
+            <label for="mensagem">Mensagem:</label><br>
+            <textarea id="mensagem" name="mensagem" rows="4" required></textarea><br><br>
+            <button type="submit">Enviar</button>
+        </form>
+    </section>
+    <footer>
+        <p>&copy; 2025 Quitandas SENAI. Todos os direitos reservados.</p>
+    </footer>
+</body>
+</html>
